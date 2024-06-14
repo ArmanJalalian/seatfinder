@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Screen;
+use App\Models\Seat;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +13,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Create 5 screens
+        Screen::factory()
+            ->count(5)
+            ->create()
+            ->each(function ($screen) {
+                // Generate a unique range of seat numbers for each screen
+                $seatingCapacity = $screen->seating_capacity;
+                $seatNumbers = range(1, $seatingCapacity);
+                shuffle($seatNumbers);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+                foreach (array_slice($seatNumbers, 0, rand(1, $seatingCapacity)) as $seatNumber) {
+                    Seat::factory()->create([
+                        'screen_id' => $screen->id,
+                        'seat_number' => $seatNumber,
+                    ]);
+                }
+            });
     }
 }

@@ -10,7 +10,7 @@ return new class extends Migration {
     {
         Schema::create('seats', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Screen::class)->constrained();
+            $table->foreignIdFor(Screen::class)->constrained()->cascadeOnDelete();
             $table->integer('seat_number');
             $table->timestamps();
         });
