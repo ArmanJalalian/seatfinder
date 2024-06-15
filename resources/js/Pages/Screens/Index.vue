@@ -1,6 +1,7 @@
 <script setup>
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { useForm, Head } from "@inertiajs/vue3";
+import InputError from "@/Components/InputError.vue";
 
 defineProps([
     'screens'
@@ -33,10 +34,12 @@ const form = useForm({
             <div class="mt-1">
                 <label for="amountOfSeats" class="block text-sm font-medium leading-6 text-gray-900">Type the number of total seats in the cinema:</label>
                 <input id="tickets" v-model="form.amountOfSeats" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                <InputError :message="form.errors.amountOfSeats" class="mt-2"/>
             </div>
             <div class="mt-1">
                 <label for="percentageTaken" class="block text-sm font-medium leading-6 text-gray-900">Type the percentage of seats that are already taken:</label>
                 <input id="tickets" v-model="form.percentageTaken" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                <InputError :message="form.errors.percentageTaken" class="mt-2"/>
             </div>
             <div class="flex items-center justify-center mt-1">
                 <div class="flex-1 border-t border-gray-300"></div>
@@ -46,6 +49,7 @@ const form = useForm({
             <div class="mt-1">
                 <label for="tickets" class="block text-sm font-medium leading-6 text-gray-900">Type the number of wanted tickets:</label>
                 <input id="tickets" v-model="form.ticketAmount" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                <InputError :message="form.errors.ticketAmount" class="mt-2"/>
             </div>
             <primary-button class="mt-4">Find seats</primary-button>
         </form>

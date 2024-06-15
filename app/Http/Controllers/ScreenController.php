@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SeatPostRequest;
 use App\Models\Screen;
 use App\Services\DetermineSeatsService;
 use Illuminate\Http\Request;
@@ -22,8 +23,10 @@ class ScreenController extends Controller
         ]);
     }
 
-    public function show(Request $request): Response
+    public function show(SeatPostRequest $request): Response
     {
+        $validated = $request->validated();
+
         $randomTakenSeats = true;
         $screenCapacity = $request->amountOfSeats;
         $percentageTaken = $request->percentageTaken;
